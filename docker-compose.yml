@@ -1,0 +1,16 @@
+version: '3'
+services:
+  api-server:
+    build: ./api-server
+    volumes:
+      - ./api-server:/home/node/app
+    ports:
+      - 5001:8080
+  website:
+    image: php:apache
+    volumes:
+      - ./website:/var/www/html
+    ports:
+      - 5000:80
+    depends_on:
+      - api-server
